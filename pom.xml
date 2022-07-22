@@ -16,12 +16,12 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java-util</artifactId>
-            <version>4.0.0-rc-2</version>
+            <version>3.21.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>4.0.0-rc-2</version>
+            <version>3.21.2</version>
         </dependency>
     </dependencies>
     <build>
