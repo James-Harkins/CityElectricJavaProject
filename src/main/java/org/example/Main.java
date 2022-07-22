@@ -9,6 +9,25 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        JsonFormat.Printer printer = JsonFormat.printer()
+                .includingDefaultValueFields()
+                .preservingProtoFieldNames();
+        for (List<String> row : rows()) {
+            ProductProto.Product product = ProductProto.Product.newBuilder()
+                    .setProductID(Integer.parseInt(row.get(0)))
+                    .setCatalog(row.get(1))
+                    .setStockcode(row.get(2))
+                    .setProductDescription(row.get(3)).build();
+            try {
+                String jsonProduct = printer.print(product);
+                System.out.println(jsonProduct);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static List<List<String>> rows() {
         List<List<String>> records = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader("ProductFile.csv"));
@@ -21,21 +40,6 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        JsonFormat.Printer printer = JsonFormat.printer()
-                .includingDefaultValueFields()
-                .preservingProtoFieldNames();
-        for (List<String> record : records) {
-            ProductProto.Product product = ProductProto.Product.newBuilder()
-                    .setProductID(Integer.parseInt(record.get(0)))
-                    .setCatalog(record.get(1))
-                    .setStockcode(record.get(2))
-                    .setProductDescription(record.get(3)).build();
-            try {
-                String jsonProduct = printer.print(product);
-                System.out.println(jsonProduct);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        return records;
     }
 }
