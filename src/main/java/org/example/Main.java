@@ -21,13 +21,21 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        JsonFormat.Printer printer = JsonFormat.printer()
+                .includingDefaultValueFields()
+                .preservingProtoFieldNames();
         for (List<String> record : records) {
             ProductProto.Product product = ProductProto.Product.newBuilder()
                     .setProductID(Integer.parseInt(record.get(0)))
                     .setCatalog(record.get(1))
                     .setStockcode(record.get(2))
                     .setProductDescription(record.get(3)).build();
-            System.out.println(product);
+            try {
+                String jsonProduct = printer.print(product);
+                System.out.println(jsonProduct);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
