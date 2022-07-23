@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         JsonFormat.Printer printer = JsonFormat.printer();
-        for (ProductProto.Product product : ProductGenerator.products()) {
+        for (ProductProto.Product product : ProductGenerator.products("ProductFile.csv")) {
             try {
                 String jsonProduct = printer.print(product);
                 System.out.println(jsonProduct);
