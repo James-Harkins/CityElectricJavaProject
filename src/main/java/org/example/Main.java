@@ -4,7 +4,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<ProductProto.Product> products = ProductFacade.generate_products_from_file("ProductFile.csv");
+        String filename = "ProductFile.csv";
+        List<ProductProto.Product> products = ProductFacade.generate_products_from_file(filename);
         ProductSerializer.serialize(products);
     }
 }
