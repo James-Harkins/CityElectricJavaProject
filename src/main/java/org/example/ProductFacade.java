@@ -1,7 +1,5 @@
 package org.example;
-
 import com.sampleProject.Product.Proto.ProductProto;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ProductGenerator {
-    public static List<ProductProto.Product> products(String filename) {
+public class ProductFacade {
+    public static List<ProductProto.Product> generate_products_from_file(String filename) {
         List<ProductProto.Product> products = new ArrayList<>();
-        for (List<String> row : rows(filename)) {
+        for (List<String> row : parse_product_rows(filename)) {
             ProductProto.Product product = ProductProto.Product.newBuilder()
                     .setProductID(Integer.parseInt(row.get(0)))
                     .setCatalog(row.get(1))
@@ -23,7 +21,7 @@ public class ProductGenerator {
         return products;
     }
 
-    public static List<List<String>> rows(String filename) {
+    public static List<List<String>> parse_product_rows(String filename) {
         List<List<String>> records = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
